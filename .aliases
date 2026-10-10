@@ -1,0 +1,43 @@
+# Shell-agnostic aliases and functions
+alias csudo="sudo -v && echo 'sudo confirmed.' && sudo"
+
+alias sctl="csudo systemctl"
+alias sctlrst="csudo systemctl restart"
+alias sctlst="csudo systemctl start"
+alias sctls="csudo systemctl status"
+alias sctlrl="csudo systemctl reload"
+alias sctlsp="csudo systemctl stop"
+
+alias sctlu="systemctl --user"
+
+alias ll="ls -lahF"
+alias la="ls -a"
+
+alias brd="bun run dev"
+#alias rsudo="/usr/bin/sudo"
+#alias sudo=pkexec
+
+alias fastlane="bundle exec fastlane"
+
+alias vim="vim -p"
+
+mkcd() {
+    mkdir -pv "$1"
+    cd "$1"
+}
+
+cdls() {
+    cd "$@" && ls -a
+}
+
+alias please=sudo
+
+syncstatus() {
+    watch -d grep -e Dirty: -e Writeback: /proc/meminfo
+}
+
+# Machine-local overrides
+if [ -f "$HOME/.aliases.local" ]; then
+    . "$HOME/.aliases.local"
+fi
+
